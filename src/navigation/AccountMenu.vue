@@ -20,7 +20,7 @@
 export default {
   data() {
     return {
-      user: { firstName: 'Jim' },
+      user: null,
       showMenu: false,
     };
   },
