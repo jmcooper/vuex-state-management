@@ -2,25 +2,21 @@
   <div>
   <h2 class="header">Register</h2>
   <form autocomplete="off" @submit="registerUser" novalidate v-on:submit.prevent>
-    <div class="form-group" :class="{ 'error' : $v.firstName.$error }">
+    <div class="form-group">
       <label for="firstName">First Name:</label>
-      <em v-if="$v.firstName.$error">Required</em>
-      <input v-model.trim="$v.firstName.$model" placeholder="First Name..." />
+      <input v-model.trim="firstName" placeholder="First Name..." />
     </div>
-    <div class="form-group" :class="{ 'error' : $v.lastName.$error }">
+    <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <em v-if="$v.lastName.$error">Required</em>
-      <input v-model.trim="$v.lastName.$model" placeholder="Last Name..." />
+      <input v-model.trim="lastName" placeholder="Last Name..." />
     </div>
-    <div class="form-group" :class="{ 'error' : $v.email.$error }">
+    <div class="form-group">
       <label for="email">Email:</label>
-      <em v-if="$v.email.$error">Required</em>
-      <input v-model.trim="$v.email.$model" placeholder="Email..." />
+      <input v-model.trim="email" placeholder="Email..." />
     </div>
-    <div class="form-group" :class="{ 'error' : $v.password.$error }">
+    <div class="form-group">
       <label for="password">Password:</label>
-      <em v-if="$v.password.$error">Required</em>
-      <input v-model.trim="$v.password.$model" type="password" placeholder="Password..." />
+      <input v-model.trim="password" type="password" placeholder="Password..." />
     </div>
     <div v-if="registerError" class="failed">
       Registration Failed
@@ -28,7 +24,7 @@
     <div class="form-group" >
       <button type="button" @click="cancel()" v-if="!saving">Cancel</button>
       <button
-        class="save" type="submit" v-if="!saving" :disabled="!isFormValid()">
+        class="save" type="submit" v-if="!saving">
         Save
       </button>
       <LoadingSpinner :loading="saving"/>
@@ -38,7 +34,6 @@
 </template>
 
 <script>
-import { required, email } from '@vuelidate/validators';
 import LoadingSpinner from '../shared/LoadingSpinner.vue';
 
 export default {
@@ -54,29 +49,12 @@ export default {
       password: null,
     };
   },
-  validations: {
-    firstName: { required },
-    lastName: { required },
-    email: { required, email },
-    password: { required },
-  },
   methods: {
     registerUser() {
       this.saving = true;
     },
     cancel() {
       this.router.navigate(['/']);
-    },
-    isFormValid() {
-      // Note: This method shouldn't be necessary, but $v.$error is broken on vuelidate@next
-      return !this.$v.firstName.$error
-        && !this.$v.lastName.$error
-        && !this.$v.email.$error
-        && !this.$v.password.$error
-        && this.$v.firstName.$dirty
-        && this.$v.lastName.$dirty
-        && this.$v.email.$dirty
-        && this.$v.password.$dirty;
     },
   },
 };

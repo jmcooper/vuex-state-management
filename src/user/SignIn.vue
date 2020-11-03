@@ -2,23 +2,20 @@
 <div>
   <h2 class="header">Sign In</h2>
   <form @submit="signIn" autocomplete="off" novalidate v-on:submit.prevent>
-    <div class="form-group" :class="{ 'error' : $v.email.$error }">
+    <div class="form-group">
       <label for="email">Email:</label>
-      <em v-if="$v.email.$error && $v.email.email.$invalid">Invalid Email</em>
-      <em v-if="$v.email.$error && $v.email.required.$invalid">Required</em>
-      <input v-model.trim="$v.email.$model" placeholder="Email..." />
+      <input v-model.trim="email" placeholder="Email..." />
     </div>
-    <div class="form-group" :class="{ 'error' : $v.password.$error }">
+    <div class="form-group">
       <label for="password">Password:</label>
-      <em v-if="$v.password.$error">Required</em>
-      <input v-model.trim="$v.password.$model" type="password" placeholder="Password..."/>
+      <input v-model.trim="password" type="password" placeholder="Password..."/>
     </div>
     <div v-if="signInError" class="failed">
       Login Failed
     </div>
     <div class="form-group buttons" >
       <button type="button" @click="cancel()">Cancel</button>
-      <button class="primary" type="submit" :disabled="!isFormValid()">
+      <button class="primary" type="submit">
         Sign In
       </button>
     </div>
@@ -27,8 +24,6 @@
 </template>
 
 <script>
-import { required, email } from '@vuelidate/validators';
-
 export default {
   name: 'SignIn',
   data() {
@@ -38,18 +33,7 @@ export default {
       signInError: false,
     };
   },
-  validations: {
-    email: { required, email },
-    password: { required },
-  },
   methods: {
-    isFormValid() {
-      // Note: This method shouldn't be necessary, but $v.$error is broken on vuelidate@next
-      return !this.$v.email.$error
-        && !this.$v.password.$error
-        && this.$v.email.$dirty
-        && this.$v.password.$dirty;
-    },
     signIn() {
       // sign in user
     },
