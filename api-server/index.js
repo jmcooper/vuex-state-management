@@ -9,6 +9,13 @@ app.use(bodyParser.json());
 
 app.get('/api/products', (req, res) => res.send(
   [{
+    id: '7277956e-795f-4c0f-9861-cf03635df5ea',
+    title: 'Mega Pokey Kit',
+    price: 129.99,
+    category: 'Climbing',
+    description: 'Everything you need for traction on that thrilling ice climb.',
+    image: 'mega-pokey-kit.jpg',
+  }, {
     id: '7aac6aed-2859-41ee-bf94-8635ee7ad291',
     title: 'AireLite Explorer Kayak',
     price: 259.95,
@@ -65,12 +72,12 @@ app.get('/api/products', (req, res) => res.send(
     description: 'Why blend in when you can scream speed with this hot and sleek firebrand?',
     image: 'firebrand-kayak.jpg',
   }, {
-    id: '7277956e-795f-4c0f-9861-cf03635df5ea',
-    title: 'Mega Pokey Kit',
-    price: 129.99,
-    category: 'Climbing',
-    description: 'Everything you need for traction on that thrilling ice climb.',
-    image: 'mega-pokey-kit.jpg',
+    id: '7aac6aed-2859-41ee-bf94-8635ee7ad291',
+    title: 'AireLite Explorer Kayak',
+    price: 259.95,
+    category: 'Kayaking',
+    description: 'The ultimate in portability comfort. Our AireLite line of kayaks is unriviled in quality and portability.',
+    image: 'airelite-kayak.jpg',
   }],
 ));
 
